@@ -1,0 +1,69 @@
+{% extends "table.html" %}
+
+{%block title%}
+<title>Câu bỏ qua</title>
+{%endblock%}
+
+{%block script_extra%}
+<script>
+    $(document).ready(function () {
+        $('#myTable').dataTable({}); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
+    });
+</script>
+
+<script type="text/javascript">
+    var skipsens_id = {{skip_sens_id}};
+    var username = "{{username}}";
+    // var skip_sens_content = {{skip_sens_content}};
+    var user_id = {{id}};
+</script>
+{%endblock%}
+
+    
+{%block tables%}    
+    <table class="table table-hover" id="myTable">
+        <thead >
+        <tr class="thead">
+            <th class="column1">ID</th>
+            <th class="column2">Nội dung</th>
+            <th class="column3">Controls</th>
+            <th class="column4">File</th>
+        </tr>
+        </thead>
+
+        <tbody id="myBody">
+            {% for i in range(0,skip_sens) %}
+            <tr class="tbody">
+                <td id="colId_{{i}}" class="colId column1">{{skip_sens_id[i]}}</td>
+                <td id="colCau_{{i}}" class="content column2">
+                    <label>{{skip_sens_content[i]}}</label>
+                </td>
+                <td id="colControls_{{i}}" class="controls column3">
+                    <button id="recordButton_{{i}}" class="recordBtn btn btn-info" title="Record"><i class="ti-control-record"></i></button>
+                    <button class="stop btn btn-info" id="stopButton_{{i}}" title="Stop" disabled><i class="ti-control-play"></i></button>
+                </td>
+                <td id="colWav_{{i}}" class="column4">
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+       
+
+    </table>
+{%endblock%}
+
+{%block content%}
+
+{%endblock%}
+
+{%block extra%}
+<div align="center">
+    <button id="upAudio" onclick="upload()" class="btn btn-outline-success animated-swing"><i class="ti-upload"></i> Tải lên</button>
+</div>
+
+{%endblock%}
+
+{%block script%}
+<script src='../static/js/app_skip.js'></script>
+{%endblock%}
+

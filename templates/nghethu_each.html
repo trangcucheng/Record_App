@@ -1,0 +1,53 @@
+{% extends "table.html" %}
+
+{%block title%}
+<title>Nghe thử</title>
+{%endblock%}
+
+{%block script_extra%}
+<script>
+    $(document).ready(function () {
+        $('#myTable').dataTable({}); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
+    });
+</script>
+
+{%endblock%}
+
+{%block content%}
+
+{%endblock%}
+
+{%block tables%}
+
+<a href="{{ url_for('export_xls_user', id = id) }}">
+    <button class="btn btn-info">Tải về</button>
+</a>
+<table class="table table-hover" id="myTable">
+    <thead>
+        <tr class="table100-head">
+            <th class="column1">ID</th>
+            <th class="column2">Nội dung</th>
+            <th class="column4">Audio</th>
+        </tr>
+    </thead>
+    
+    <tbody id="myBody">
+        {% for i in range(0,complete_sens) %}
+        <tr class="tbody">
+            <td class="colId column1">{{sens_id_arr[i]}}</td>
+            <td class="content column2">{{transcripts[i]}} </td>
+            <td class="controls column3">
+                <audio controls>
+                    <source src="/{{files_path[i]}}" type="audio/wav">
+                </audio>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{%endblock%}
+{%block script%}
+
+{%endblock%}
